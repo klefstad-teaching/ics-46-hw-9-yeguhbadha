@@ -55,26 +55,30 @@ vector<string> generate_word_ladder(const string& begin_word, const string& end_
 
     set<string> visited;
     visited.insert(begin_word);
-    while (ladder_queue.empty() == false)
+    // if target word is in word list
+    if (word_list.find(end_word) != word_list.end()) 
     {
-        vector<string> ladder = ladder_queue.front();
-        ladder_queue.pop();
-
-        string last_word = ladder.back();
-        if (last_word == end_word) { return ladder; }
-        for (string word : word_list)
+        while (ladder_queue.empty() == false)
         {
-            if (is_adjacent(last_word, word))
+            vector<string> ladder = ladder_queue.front();
+            ladder_queue.pop();
+
+            string last_word = ladder.back();
+            if (last_word == end_word) { return ladder; }
+            for (string word : word_list)
             {
-                if (visited.find(word) == visited.end())
+                if (is_adjacent(last_word, word))
                 {
-                    visited.insert(word);
-                    vector<string> new_ladder = ladder;
-                    new_ladder.push_back(word);
+                    if (visited.find(word) == visited.end())
+                    {
+                        visited.insert(word);
+                        vector<string> new_ladder = ladder;
+                        new_ladder.push_back(word);
 
-                    if (word == end_word) { return new_ladder; }
+                        if (word == end_word) { return new_ladder; }
 
-                    ladder_queue.push(new_ladder);
+                        ladder_queue.push(new_ladder);
+                    }
                 }
             }
         }
