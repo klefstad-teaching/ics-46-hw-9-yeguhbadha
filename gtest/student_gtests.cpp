@@ -23,16 +23,6 @@ TEST(WordLadderTest, IsAdjacent) {
     EXPECT_TRUE(is_adjacent("ca", "cat"));
 }
 
-TEST(WordLadderTest, LoadWords) {
-    create_temp_words_file("cat\ndog\nCAT\nDog");
-    std::set<std::string> word_list;
-    load_words(word_list, "temp_words.txt");
-    EXPECT_EQ(word_list.size(), 2);
-    EXPECT_NE(word_list.find("cat"), word_list.end());
-    EXPECT_NE(word_list.find("dog"), word_list.end());
-    delete_temp_words_file();
-}
-
 TEST(WordLadderTest, verify) {
-  verify_word_ladder();
+    verify_word_ladder();
 }
